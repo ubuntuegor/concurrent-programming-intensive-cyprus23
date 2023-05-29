@@ -42,8 +42,7 @@ sourceSets.test {
 
 java {
     toolchain {
-        // TODO change to Java 13, because of spins in novel AQS
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(13))
     }
 }
 
