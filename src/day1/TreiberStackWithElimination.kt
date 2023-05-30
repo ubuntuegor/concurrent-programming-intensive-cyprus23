@@ -37,7 +37,7 @@ class TreiberStackWithElimination<E> : Stack<E> {
     }
 
     private fun randomCellIndex(): Int =
-        ThreadLocalRandom.current().nextInt(0, eliminationArray.size)
+        ThreadLocalRandom.current().nextInt(eliminationArray.size)
 
     companion object {
         private const val ELIMINATION_ARRAY_SIZE = 2 // Do not change!
