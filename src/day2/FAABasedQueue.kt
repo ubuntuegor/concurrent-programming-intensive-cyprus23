@@ -24,7 +24,7 @@ class FAABasedQueue<E> : Queue<E> {
             val curTail = tail.value
             val i = enqIdx.getAndIncrement()
             val node = findSegment(curTail, i / CHUNK_SIZE)
-            tail.compareAndSet(curTail, node)
+            if (node.id > curTail.id) tail.compareAndSet(curTail, node)
             if (node.array[i % CHUNK_SIZE].compareAndSet(null, element)) return
         }
     }
@@ -37,7 +37,7 @@ class FAABasedQueue<E> : Queue<E> {
             val curHead = head.value
             val i = deqIdx.getAndIncrement()
             val node = findSegment(curHead, i / CHUNK_SIZE)
-            head.compareAndSet(curHead, node)
+            if (node.id > curHead.id) head.compareAndSet(curHead, node)
             if (node.array[i % CHUNK_SIZE].compareAndSet(null, POISONED)) continue
             return node.array[i % CHUNK_SIZE].value as E
         }
@@ -71,5 +71,5 @@ class FAABasedQueue<E> : Queue<E> {
     }
 }
 
-private const val CHUNK_SIZE = 64
+private const val CHUNK_SIZE = 2
 private val POISONED = Any()
