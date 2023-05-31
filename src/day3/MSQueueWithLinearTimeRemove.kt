@@ -95,7 +95,7 @@ class MSQueueWithLinearTimeRemove<E> : QueueWithRemove<E> {
          * TODO: nodes as "extracted or removed".
          */
         private val _extractedOrRemoved = atomic(false)
-        val extractedOrRemoved = _extractedOrRemoved.value
+        val extractedOrRemoved get() = _extractedOrRemoved.value
 
         fun markExtractedOrRemoved(): Boolean = _extractedOrRemoved.compareAndSet(false, true)
 
