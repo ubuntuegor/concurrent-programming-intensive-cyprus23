@@ -105,3 +105,67 @@ To test your solution, please run:
 
 * `./gradlew test --tests FlatCombiningQueueTest` on Linux or MacOS
 * `gradlew test --tests FlatCombiningQueueTest` on Windows
+
+
+## Day 3
+
+### Linear-time removals in Michael-Scott queue
+
+In [`src/day2/MSQueueWithLinearTimeRemove.kt`](src/day2/MSQueueWithLinearTimeRemove.kt),
+implement a Michael-Scott queue with an additional `remove(element)` operation.
+The implementation should find the first node that contains the specified element
+in linear time and then remove this node also in linear time.
+
+To test your solution, please run:
+
+* `./gradlew test --tests MSQueueWithLinearTimeRemoveTest` on Linux or MacOS
+* `gradlew test --tests MSQueueWithLinearTimeRemoveTest` on Windows
+
+### Constant-time removals in Michael-Scott queue
+
+In [`src/day2/MSQueueWithLinearTimeRemove.kt`](src/day2/MSQueueWithLinearTimeRemove.kt),
+implement a Michael-Scott queue with an additional `remove(element)` operation.
+The implementation should find the first node that contains the specified element
+in linear time, but remove this node in _constant_ time.
+
+* `./gradlew test --tests MSQueueWithConstantTimeRemoveTest` on Linux or MacOS
+* `gradlew test --tests MSQueueWithConstantTimeRemoveTest` on Windows
+
+### Array of Atomic Counters
+
+In [`src/day3/AtomicCounterArray.kt`](src/day3/AtomicCounterArray.kt),
+implement the `inc2(..)` function that atomically increments two counters.
+using the CAS2 algorithm. In this data structure, all successful updates
+install unique values in the array cells.
+This property enables simpler CAS2 implementation.
+
+To test your solution, please run:
+
+* `./gradlew test --tests AtomicCounterArrayTest` on Linux or MacOS
+* `gradlew test --tests AtomicCounterArrayTest` on Windows
+
+### Double-Compare-Single-Set
+
+In [`src/day3/AtomicArrayWithDCSS.kt`](src/day3/AtomicArrayWithDCSS.kt),
+implement the `dcss(..)` operation. Similarly to CAS2, it requires
+allocating a descriptor and installing it in the updating memory location.
+We need the `dcss(..)` operation for the next task, to resolve the ABA-problem
+in the CAS2 algorithm.
+
+To test your solution, please run:
+
+* `./gradlew test --tests AtomicArrayWithDCSSTest` on Linux or MacOS
+* `gradlew test --tests AtomicArrayWithDCSSTest` on Windows
+
+### CAS2
+
+In [`src/day3/AtomicArrayWithCAS2.kt`](src/day3/AtomicArrayWithCAS2.kt),
+implement the `cas2(..)` operation. Unlike in the array of atomic counters,
+which values always increase, now updates are no longer unique.
+This can lead to the ABA problem. To solve it, please use
+the Double-Compare-Single-Set operation when installing CAS2 descriptors.
+
+To test your solution, please run:
+
+* `./gradlew test --tests AtomicArrayWithCAS2Test` on Linux or MacOS
+* `gradlew test --tests AtomicArrayWithCAS2Test` on Windows
