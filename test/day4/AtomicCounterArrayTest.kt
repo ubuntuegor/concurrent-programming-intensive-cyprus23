@@ -5,7 +5,7 @@ import org.jetbrains.kotlinx.lincheck.annotations.*
 import org.jetbrains.kotlinx.lincheck.paramgen.*
 
 @Param(name = "index", gen = IntGen::class, conf = "0:${ARRAY_SIZE - 1}")
-class AtomicCounterArrayTest : TestBase(AtomicCounterArraySequential::class, checkObstructionFreedom = false) {
+class AtomicCounterArrayTest : TestBase(AtomicCounterArraySequential::class) {
     private val counters = AtomicCounterArray(ARRAY_SIZE)
 
     @Synchronized
