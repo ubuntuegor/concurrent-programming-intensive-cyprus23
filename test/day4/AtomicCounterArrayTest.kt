@@ -8,11 +8,9 @@ import org.jetbrains.kotlinx.lincheck.paramgen.*
 class AtomicCounterArrayTest : TestBase(AtomicCounterArraySequential::class) {
     private val counters = AtomicCounterArray(ARRAY_SIZE)
 
-    @Synchronized
     @Operation
     fun get(@Param(name = "index") index: Int) = counters.get(index)
 
-    @Synchronized
     @Operation(handleExceptionsAsResult = [IllegalArgumentException::class])
     fun inc2(@Param(name = "index") index1: Int, @Param(name = "index") index2: Int) = counters.inc2(index1, index2)
 }
