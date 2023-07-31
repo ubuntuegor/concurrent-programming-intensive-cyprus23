@@ -16,7 +16,19 @@ class TreiberStackWithElimination<E> : Stack<E> {
     }
 
     private fun tryPushElimination(element: E): Boolean {
-        TODO("Implement me!")
+        val i = randomCellIndex()
+        val cell = eliminationArray[i]
+
+        return if (cell.compareAndSet(CELL_STATE_EMPTY, element)) {
+            repeat(ELIMINATION_WAIT_CYCLES) {
+                // do nothing
+            }
+
+            cell.getAndSet(CELL_STATE_EMPTY) == CELL_STATE_RETRIEVED
+        } else {
+            false
+        }
+
         // TODO: Choose a random cell in `eliminationArray`
         // TODO: and try to install the element there.
         // TODO: Wait `ELIMINATION_WAIT_CYCLES` loop cycles
@@ -29,7 +41,20 @@ class TreiberStackWithElimination<E> : Stack<E> {
     override fun pop(): E? = tryPopElimination() ?: stack.pop()
 
     private fun tryPopElimination(): E? {
-        TODO("Implement me!")
+        val i = randomCellIndex()
+        val cell = eliminationArray[i]
+        val value = cell.value
+
+        return if (value != CELL_STATE_EMPTY && value != CELL_STATE_RETRIEVED) {
+            if (cell.compareAndSet(value, CELL_STATE_RETRIEVED)) {
+                value as E
+            } else {
+                null
+            }
+        } else {
+            null
+        }
+
         // TODO: Choose a random cell in `eliminationArray`
         // TODO: and try to retrieve an element from there.
         // TODO: On success, return the element.
